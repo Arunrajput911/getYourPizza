@@ -1,37 +1,60 @@
+require("dotenv").config();
 const express=require("express");
 const app=express();
 const ejs=require("ejs");
-//not require to install, it is inbuilt module;
 const path=require("path");
 const expressLayout = require("express-ejs-layouts");
+const mongoose= require("mongoose");
+const session=require("express-session");
+const flash=require("express-flash");
+const MongoDbStore= require("connect-mongo")(session);
 
+//Assets
+app.use(express.static('public'));
+app.use(flash());
+app.use(express.json());//json data recive krne ke liye
+
+//global middleware
+app.use((req,res,next) => {
+res.locals.session = req.session;
+next();
+})
 
 //set template engine
 app.use(expressLayout);
 app.set('views', path.join(__dirname, '/resources/views'));
 app.set("view engine",'ejs');
 
+//database connection
+const url='mongodb://localhost/pizza';
 
-
-//Assets
-app.use(express.static('public'));
-
-app.get("/", (req,res) => {
-    res.render('home');
+mongoose.connect(url,{useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology:true, useFindAndModify:true});
+const connection = mongoose.connection;
+connection.once('open',() => {
+    console.log("Database connected....");
+}).catch(err => {
+    console.log('Connected failed....');
 });
 
-app.get("/cart", (req,res) => {
-    res.render('customers/cart');
+//session store
+let mongoStore = new MongoDbStore({
+    mongooseConnection:connection,
+    collection:'sessions'
 });
 
-app.get("/login", (req,res) => {
-    res.render('auth/login');
-});
+//session config
+app.use(session({
+    secret: process.env.COOKIE_SECRET,
+    resave:false,
+    store:mongoStore,//nhi to by default memory mai store kr dega isliye db mai store krne ke liye mongostore banana pda
+    saveUninitialized:false,
+    cookie:{maxAge:1000*60*60*24} //24 hours
+}))
 
-app.get("/register", (req,res) => {
-    res.render('auth/register');
-});
 
+
+// routes import
+require("./routes/web.js")(app)
 
 
 
