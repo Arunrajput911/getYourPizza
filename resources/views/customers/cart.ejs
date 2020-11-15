@@ -12,19 +12,19 @@
         </div>
 
         <div class="pizza-list">
-            <!-- for of loop used and object.value for object to array -->
+            <!-- forOf loop used and object.value for object to array -->
         <% for(let pizza of Object.values(session.cart.items)) { %>
 
              <div class="flex items-center my-8">
-                <img class="w-24" src="/img/<%= pizza.item.image %>" alt="pizza-image">
+                <img class="w-24" src="/img/<%= pizza.items.image %>" alt="pizza-image">
                 <div class="flex-1 ml-4">
                     <h1>
-                        <%= pizza.item.name %>
+                        <%= pizza.items.name %>
                     </h1>
-                    <span><%= pizza.item.size %></span>
+                    <span><%= pizza.items.size %></span>
                 </div>
                 <span class="flex-1"><%= pizza.qty%></span>
-                <span class="font-bold text-lg"><%= pizza.item.price * pizza.qty %></span>
+                <span class="font-bold text-lg"><%= pizza.items.price * pizza.qty %></span>
              </div>
              <% } %>
             </div>
@@ -32,27 +32,34 @@
         <div class="text-right py-4">
             <div>
                 <span class="text-lg font-bold">Total Amount:</span>
-                <span class="amount text-2xl font-bold ml-2">Rs.<%= session.cart.totalPrice %></span>
+                <span class="amount text-2xl font-bold ml-2">₹ <%= session.cart.totalprice %></span>
+            </div>
+            <% if(user){ %>
+             <div>
+                   <form action="/orders" method="post" class="mt-8">
+
+                        <input class="border border-gray-400 p-2 w-1/2 mb-4" name="phone" type="text" placeholder="Phone number">
+
+                        <input class="border border-gray-400 p-2 w-1/2" name="address" type="text" placeholder="Address">
+
+                       <div>
+                        <button type="submit" class="btn-primary rounded-full font-bold text-white mt-6 px-6 py-2">
+                            Order Now</button>
+                      </div>
+                </form>
             </div>
 
-             <div>
-                   <form action="" class="mt-8">
-                        <input class="border border-gray-400 p-2 w-1/2 mb-4" type="text" placeholder="Phone number">
-                        <input class="border border-gray-400 p-2 w-1/2" type="text" placeholder="Address">
-             <div>
-    <!-- <button class="btn-primary rounded-full font-bold text-white mt-6 px-6 py-2">Order Now</button> -->
-             </div>
-                       </form>
-               </div>
+           <% } else { %>
 
-          <a href="" class="inline-block cursor-pointer font-bold btn-primary rounded-full text-white mt-6 px-6 py-2">
+               <a href="/login" class="inline-block cursor-pointer font-bold btn-primary rounded-full text-white mt-6 px-6 py-2">
               Login to continue</a>
+            <% } %>
 
         </div>
          
     </div>
 
-<% } else { %>
+          <% } else { %>
  <div class="empty-cart py-16">
         <div class="container mx-auto text-center">
              <h1 class="text-3xl font-bold mb-2">Cart empty</h1>

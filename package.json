@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.21.0",
+    "bcrypt": "^5.0.0",
     "connect-mongo": "^3.2.0",
     "cross-env": "^7.0.2",
     "dotenv": "^8.2.0",
@@ -24,10 +25,14 @@
     "express-flash": "0.0.2",
     "express-session": "^1.17.1",
     "laravel-mix": "^5.0.7",
+    "moment": "^2.29.1",
     "mongoose": "^5.10.11",
     "nodemon": "^2.0.6",
     "noty": "^3.2.0-beta",
-    "path": "^0.12.7"
+    "passport": "^0.4.1",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "socket.io": "^3.0.1"
   },
   "devDependencies": {
     "resolve-url-loader": "^3.1.0",
