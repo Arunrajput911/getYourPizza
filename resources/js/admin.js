@@ -1,8 +1,8 @@
-import axios from 'axios'
-import moment from 'moment'
-import Noty from 'noty'
+import axios from 'axios';
+import moment from 'moment';
+import Noty from 'noty';
 
-export function initAdmin(socket) {
+function initAdmin(socket) {
     const orderTableBody = document.querySelector('#orderTableBody')
     let orders = []
     let markup
@@ -11,26 +11,29 @@ export function initAdmin(socket) {
         headers: {
             "X-Requested-With": "XMLHttpRequest"
         }
-    }).then(res => {
+    }).then((res) => {
         orders = res.data
         markup = generateMarkup(orders)
         orderTableBody.innerHTML = markup
+        
     }).catch(err => {
         console.log(err)
     })
 
     function renderItems(items) {
         let parsedItems = Object.values(items)
+        // console.log(parsedItems)
         return parsedItems.map((menuItem) => {
             return `
-                <p> ${ menuItem.item.name } - ${ menuItem.qty } pcs </p>
+                <p> ${ menuItem.items.name } - ${ menuItem.qty } pcs </p>
             `
         }).join('')
       }
 
-    function generateMarkup(orders) {
-        return orders.map(order => {
+    function generateMarkup(orders) { 
+        return orders.map((order) => {
             return `
+             
                 <tr>
                 <td class="border px-4 py-2 text-green-900">
                     <p>${ order._id }</p>
@@ -90,3 +93,7 @@ export function initAdmin(socket) {
         orderTableBody.innerHTML = generateMarkup(orders)
     })
 }
+
+
+
+export default initAdmin

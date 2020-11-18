@@ -1,7 +1,7 @@
 import axios from 'axios'; //request send krne ke liye
 import Noty from 'noty'; //for notify to user
-import { initAdmin } from './admin'
-import moment from 'moment'
+import initAdmin from './admin';
+import moment from 'moment';
 
 let addToCart = document.querySelectorAll(".add-to-cart");
 let cartCounter=document.querySelector("#cart-counter");
@@ -67,6 +67,7 @@ function updateStatus(order) {
   let stepCompleted = true;
   statuses.forEach((status) => {
       let dataProp=status.dataset.status
+    //   console.log(dataProp)
       if(stepCompleted){
           status.classList.add('step-completed');
       }
@@ -84,18 +85,17 @@ function updateStatus(order) {
 updateStatus(order);
 
 //socket
-
 let socket = io()
-initAdmin(socket)
 
 //join
 if(order){
 socket.emit('join',`order_${order._id}`);
 }
 
-let adminAreaPath = window.location.pathname
+let adminAreaPath = window.location.pathname;
 
 if(adminAreaPath.includes('admin')){
+    initAdmin(socket)
     socket.emit('join','adminRoom')
 }
 

@@ -24,9 +24,9 @@ app.set('eventEmitter', eventEmitter)
 
 
 //database connection
-const url='mongodb://localhost/pizza';
 
-mongoose.connect(url,{useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology:true, useFindAndModify:true});
+
+mongoose.connect(process.env.MONGO_CONNECTION_URL,{useNewUrlParser:true, useCreateIndex:true, useUnifiedTopology:true, useFindAndModify:true});
 const connection = mongoose.connection;
 connection.once('open',() => {
     console.log("Database connected....");
@@ -70,6 +70,11 @@ app.use((req,res,next) => {
 
 // routes import
 require("./routes/web.js")(app)
+
+app.use((req,res) => {
+    // res.status(404).render("errors/404")
+    res.status(404).send("404,Page Not Found")
+})
 
 
 

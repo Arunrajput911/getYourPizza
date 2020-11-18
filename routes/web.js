@@ -37,7 +37,7 @@ app.get('/customer/orders/:id', auth ,orderController().show)
 
 //admin route
 app.get('/admin/orders', admin ,AdminOrderController().index)
-app.get('/admin/orders/status', admin ,statusController().update)
+app.post('/admin/order/status', admin ,statusController().update)
 
 }
 
