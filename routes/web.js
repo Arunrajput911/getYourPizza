@@ -11,21 +11,21 @@ const auth = require('../app/http/middleware/auth');
 const admin = require('../app/http/middleware/admin');
 
 
-
+ 
 function initRoutes(app){
     
 app.get("/",homeController().index);
 
 app.get("/login", guest, authController().login);
 
-app.post("/login", authController().postlogin);
+app.post("/login", authController().postlogin);   
 
 app.get("/register", guest, authController().register);
 
 app.post("/register",authController().postregister);
 
 app.post("/logout",authController().logout);
-
+ 
 app.get("/cart",cartController().index);
 
 app.post('/update-cart',cartController().update)

@@ -6,6 +6,14 @@ function cartController(){
         },
         update(req,res){
 
+            // let cart = {
+            //     items: {
+            //         pizzaId : {items:pizzaObject,qty:0}
+            //     },
+            //     totalQty:0,
+            //     totalprice:0
+            // }
+
             //for the first time creating cart and adding basic object structure.
             if(!req.session.cart){
                 req.session.cart = {
@@ -15,7 +23,8 @@ function cartController(){
                 }
              }
             let cart = req.session.cart
-
+               
+            //console.log(req.body)
                 //check if item does not exist in cart
             if(!cart.items[req.body._id]){
                     cart.items[req.body._id] = {
@@ -29,7 +38,7 @@ function cartController(){
                     cart.totalQty= cart.totalQty + 1
                     cart.totalprice = cart.totalprice + req.body.price
                 }
-
+            // data send in app.js
             return res.json( { totalQty: req.session.cart.totalQty});
         }
     }

@@ -55,7 +55,7 @@ function authController(){
                    return   res.redirect("/register")
                    }
             });
-
+   
             //hash
             const hashpassword= await bcrypt.hash(password,10);
 

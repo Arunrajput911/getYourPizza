@@ -12,7 +12,7 @@ function orderController() {
             }
 
            const order = new Order({
-               customerId:req.user._id,
+               customerId:req.user._id, 
                items:req.session.cart.items,
                phone:phone,
                address
