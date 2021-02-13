@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "serve": "node server.js",
-    "dev": "nodemon server.js",
+    "start": "node server.js",
     "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "npm run development -- --watch",
     "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
@@ -27,7 +26,6 @@
     "laravel-mix": "^5.0.7",
     "moment": "^2.29.1",
     "mongoose": "^5.10.11",
-    "nodemon": "^2.0.6",
     "noty": "^3.2.0-beta",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
