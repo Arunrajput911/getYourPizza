@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "parcel server.js"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,7 @@
     "moment": "^2.29.1",
     "mongoose": "^5.10.11",
     "noty": "^3.2.0-beta",
+    "parcel": "^1.12.4",
     "passport": "^0.4.1",
     "passport-local": "^1.0.0",
     "path": "^0.12.7",

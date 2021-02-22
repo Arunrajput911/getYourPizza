@@ -9,6 +9,9 @@ const session=require("express-session");
 const flash=require("express-flash");
 const passport=require("passport");
 const Emitter = require('events')
+const axios = require('axios')
+
+
 
 const MongoDbStore= require("connect-mongo")(session);
 
@@ -78,11 +81,9 @@ app.use((req,res) => {
 
 
 
-
 const PORT = process.env.PORT || 3300
 const server = app.listen(PORT, () => {
     console.log("server is running on 3300 port");
-    //console.log(`server is running on port ${PORT}`)
 });
 
 //socket 
